@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: '${CONTAINER_NAME}'
+    hostname: '${HOSTNAME}'
+    # Uncomment the next line to use a non-root user for all processes.
+    user: vscode
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    cap_add:
+     - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    # Overrides default command so things don't shut down after the process ends.
+    entrypoint: /bin/sh -c "while sleep 1000; do :; done"
+    volumes:
+      - ../..:/workspace/:cached
+      - ${ZSH_HISTORY_PATH:-.home/.zsh_history}:/home/vscode/.zsh_history
+
+networks:
+  default:
+    external: true
+    name: '${DEVELOPMENT_NETWORK:-app}'

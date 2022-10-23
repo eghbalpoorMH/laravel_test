@@ -1,0 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+	"name": "Laravel",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace/",
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"php.validate.executablePath": "/usr/local/bin/php"
+	},
+	// Add the IDs of extensions you want installed when the container is created.
+	// Note that some extensions may not work in Alpine Linux. See https://aka.ms/vscode-remote/linux.
+	"extensions": [
+		"eamodio.gitlens",
+		"huizhou.githd",
+		"xyz.local-history",
+		"azuretools.vscode-docker",
+		"adam-bender.commit-message-editor",
+		"pkief.material-icon-theme",
+		"amiralizadeh9480.laravel-extra-intellisense",
+		"felixfbecker.php-intellisense",
+		"calebporzio.better-phpunit",
+		"neilbrayfield.php-docblocker",
+		"bmewburn.vscode-intelephense-client",
+		"MehediDracula.php-namespace-resolver",
+		"xdebug.php-debug",
+		"redhat.vscode-yaml",
+		"stef-k.laravel-goto-controller",
+		"onecentlin.laravel5-snippets",
+		"rafa-acioly.laravel-helpers",
+		"codingyu.laravel-goto-view",
+		"austenc.laravel-blade-spacer",
+		"onecentlin.laravel-blade",
+		"shufo.vscode-blade-formatter",
+		"ryannaddy.laravel-artisan",
+		"esbenp.prettier-vscode",
+		"zobo.php-intellisense",
+		"junstyle.php-cs-fixer",
+		"christian-kohler.path-intellisense",
+		"donjayamanne.githistory",
+		"hookyqr.beautify"
+	],
+	"remoteUser": "vscode"
+}

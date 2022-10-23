@@ -1,0 +1,31 @@
+stages:
+  - build
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.7.0-debug
+    entrypoint: [""]
+  before_script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+  script:
+    - |
+      if [[ "$CI_COMMIT_BRANCH" == "main" ]]; then
+        tag=""
+        echo "Running on branch main: tag = 'latest'"
+      else
+        tag=":$CI_COMMIT_REF_SLUG"
+        echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
+      fi
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --cache=true 
+      --compressed-caching=false
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "$CI_REGISTRY_IMAGE${tag}"
+  only:
+    - main
+    - develop
+    - tags
